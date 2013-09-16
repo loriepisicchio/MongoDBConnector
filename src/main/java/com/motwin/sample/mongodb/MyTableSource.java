@@ -42,7 +42,10 @@ public class MyTableSource extends AbstractMongoDBSource {
     protected DBCursor performQuery(DB aDatabase) {
         Preconditions.checkNotNull(aDatabase, "aDatabase cannot be null");
 
-        DBCollection collection = aDatabase.getCollection("mobileUser");
+        // This method will fetch all elements of collection "myTable"
+        
+        // TODO : adapt this to perform the query matching your needs
+        DBCollection collection = aDatabase.getCollection("myTable");
 
         DBCursor cursor = collection.find();
 
@@ -56,6 +59,10 @@ public class MyTableSource extends AbstractMongoDBSource {
         ObjectNode row;
         row = Jsons.newObject();
 
+        // Each element will be mapped in a virtual table row. 
+        // In this sample, the table has one column for the id, one for the content.
+        
+        // TODO : adapt this to the schema of your virtual table, and the content of the MongoDB collection
         row.put("id", aMongoRow.get("_id").toString());
         row.put("content", aMongoRow.toString());
 
